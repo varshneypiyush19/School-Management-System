@@ -19,7 +19,14 @@ export default function Login() {
       axios
         .post(`http://localhost:5000/api/school/login`, { ...values })
         .then((res) => {
-          console.log("Register response", res);
+          const token = res.headers.get("Authorization");
+          if (token) {
+            localStorage.setItem("token", token);
+          }
+          const user = res.data.user;
+          if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+          }
           setMessage(res.data.message);
           setMessageType("success");
           Formik.resetForm();
@@ -45,6 +52,7 @@ export default function Login() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         height: "100%",
+        minHeight: "80vh",
         paddingTop: "60px",
         paddingBottom: "60px",
       }}
@@ -56,9 +64,6 @@ export default function Login() {
           type={messageType}
         />
       )}
-      <Typography variant="h2" sx={{ textAlign: "center" }}>
-        Login
-      </Typography>
       <Box
         component="form"
         sx={{
@@ -75,6 +80,9 @@ export default function Login() {
         autoComplete="off"
         onSubmit={Formik.handleSubmit}
       >
+        <Typography variant="h2" sx={{ textAlign: "center" }}>
+          Login
+        </Typography>
         <TextField
           name="email"
           label="Email"

@@ -111,7 +111,7 @@ module.exports = {
         "-password",
         "-_id",
         "-owner_name",
-        "createdAt",
+        "-createdAt",
       ]);
       res.status(200).json({
         success: true,

@@ -14,4 +14,5 @@ router.get("/all", getAllSchools);
 router.post("/login", loginSchool);
 router.patch("/update", authMiddleware(["SCHOOL"]), updateSchool);
 router.get("/fetch-single", authMiddleware(["SCHOOL"]), getSchoolOwnData);
+
 module.exports = router;

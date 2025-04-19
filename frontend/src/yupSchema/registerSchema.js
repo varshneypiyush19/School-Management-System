@@ -1,5 +1,5 @@
 import * as yup from "yup";
-export const registerSchema = yup.object()({
+export const registerSchema = yup.object({
   school_name: yup
     .string()
     .min(8, "School name must contain 8 characters")
